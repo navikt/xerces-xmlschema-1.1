@@ -1,0 +1,9 @@
+Bundle-SymbolicName: no.nav.eresept.thirdparty.java_cup.runtime
+ver: ${project.version}
+-output: ${bsn}-${ver}.jar
+Bundle-Version: ${ver}
+Export-Package: \
+ java_cup.*;version=${java-cup.version}
+# Uncomment next line to customize imports. The last entry MUST be "*"
+Import-Package: \
+ *

@@ -1,0 +1,82 @@
+name: 02 release
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Create settings.xml
+        uses: whelk-io/maven-settings-xml-action@v20
+        with:
+          repositories: '[{ "id": "github", "name": "github", "url": "https://maven.pkg.github.com/navikt/xerces-xmlschema-1.1", "releases": { "enabled": "true" }, "snapshots": { "enabled": "false" } }]'
+          servers: '[{ "id": "github", "username": "${{ github.actor }}", "password": "${{ secrets.GITHUB_TOKEN }}" }]'
+
+      - name: Configure git user
+        run: |
+          git config user.name "GitHub Actions Bot (${{ github.actor }})"
+          git config user.email "actions@github.com"
+
+      - name: Publish
+        run: |
+          mvn --batch-mode deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Report success?
+        if: success()
+        env:
+          SLACK_CHANNEL: eresept
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: "release xerces-xmlschema-1.1"
+          SLACK_TITLE: "Successfully released _*xerces-xmlschema-1.1*_"
+          SLACK_MESSAGE: " "
+          SLACK_COLOR: "good"
+          SLACK_ICON: https://github.com/github.png?size=48
+          MSG_MINIMAL: true
+          SLACK_FOOTER: "eresept © 2022"
+        uses: rtCamp/action-slack-notify@master
+      - name: Report failure?
+        if: failure()
+        env:
+          SLACK_CHANNEL: eresept
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: "release xerces-xmlschema-1.1"
+          SLACK_TITLE: "Release of _*xerces-xmlschema-1.1*_ failed"
+          SLACK_COLOR: "danger"
+          SLACK_ICON: https://github.com/github.png?size=48
+          SLACK_MESSAGE: "See https://github.com/${{ github.repository }}/actions/run/${{ github.run_id }} for details"
+          SLACK_FOOTER: "eresept © 2022"
+        uses: rtCamp/action-slack-notify@master
+      - name: Report cancellation?
+        if: cancelled()
+        env:
+          SLACK_CHANNEL: eresept
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: "release xerces-xmlschema-1.1"
+          SLACK_TITLE: "Release of _*xerces-xmlschema-1.1*_ was cancelled"
+          SLACK_MESSAGE: " "
+          SLACK_COLOR: "warning"
+          SLACK_ICON: https://github.com/github.png?size=48
+          MSG_MINIMAL: true
+          SLACK_FOOTER: "eresept © 2022"
+        uses: rtCamp/action-slack-notify@master

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TeleCom xmlns="http://foo.bar"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="urn:http://foo.bar anyuri.xsd">
+    <TypeTelecom DN="Hjemme" V="H"/>
+    <TeleAddress V="tel:"/>
+</TeleCom>

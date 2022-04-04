@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>no.nav.eresept</groupId>
+    <artifactId>xerces-xmlschema-1.1</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java-cup.version>0.10.0</java-cup.version>
+        <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <xerces.version>2.12.2</xerces.version>
+        <xerces.version.name>2_12_2</xerces.version.name>
+        <xpath2.version>1.2.1</xpath2.version>
+        <java.version>8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <bnd.version>6.1.0</bnd.version>
+        <xerces.zip>Xerces-J-bin.${xerces.version}-xml-schema-1.1.zip</xerces.zip>
+        <xerces.dir>${project.build.directory}/xerces-${xerces.version.name}-xml-schema-1.1</xerces.dir>
+    </properties>
+
+    <modules>
+        <module>thirdparty/java_cup-runtime</module>
+        <module>thirdparty/xpath2-processor</module>
+        <module>thirdparty/xercesImpl</module>
+        <module>xml-validator</module>
+    </modules>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        </archive>
+                        <skipIfEmpty>true</skipIfEmpty>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>biz.aQute.bnd</groupId>
+                    <artifactId>bnd-maven-plugin</artifactId>
+                    <version>${bnd.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>bnd-process</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <executions>
+                    <execution>
+                        <id>download-xerces</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <url>https://dlcdn.apache.org//xerces/j/binaries/${xerces.zip}</url>
+                    <unpack>true</unpack>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <md5>ad5272835ff8fefe3878e3ed528c6fdc</md5>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target name="copy thirdparty jars" >
+                                <copy file="${xerces.dir}/xercesImpl.jar" tofile="thirdparty/xercesImpl/lib/xercesImpl.jar" />
+                                <copy file="${xerces.dir}/cupv10k-runtime.jar" tofile="thirdparty/java_cup-runtime/lib/cupv10k-runtime.jar" />
+                                <copy file="${xerces.dir}/org.eclipse.wst.xml.xpath2.processor_${xpath2.version}.jar" tofile="thirdparty/xpath2-processor/lib/org.eclipse.wst.xml.xpath2.processor_${xpath2.version}.jar" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>lib</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>eresept xerces</name>
+            <url>https://maven.pkg.github.com/navikt/xerces-xmlschema-1.1</url>
+        </repository>
+    </distributionManagement>
+</project>
