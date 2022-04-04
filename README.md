@@ -1,3 +1,5 @@
+[![02 release](https://github.com/navikt/xerces-xmlschema-1.1/actions/workflows/02_release.yaml/badge.svg)](https://github.com/navikt/xerces-xmlschema-1.1/actions/workflows/02_release.yaml)
+
 # Xerces-J 2.12.2
 
 repackaged resources from Apache Xerces2-J 2.12.2 xml-schema-1.1
