@@ -13,6 +13,7 @@
         <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+
     <dependencies>
         <dependency>
             <groupId>no.nav.eresept.thirdparty.java_cup</groupId>
@@ -20,6 +21,7 @@
             <version>${java-cup.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

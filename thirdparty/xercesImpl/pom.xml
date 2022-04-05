@@ -15,6 +15,11 @@
     </parent>
     <dependencies>
         <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>${xerces.version}</version>
+        </dependency>
+        <dependency>
             <groupId>no.nav.eresept.thirdparty.java_cup</groupId>
             <artifactId>runtime</artifactId>
             <version>${java-cup.version}</version>

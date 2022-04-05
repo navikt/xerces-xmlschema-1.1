@@ -1,0 +1,17 @@
+name: 01 snyk test
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '.github/workflows'
+
+jobs:
+  snyk:
+    uses: navikt/eresept-actions/.github/workflows/snyk.yaml@main
+    secrets:
+      snyk-token: ${{ secrets.SNYK_TOKEN }}
+      token: ${{ secrets.READER_TOKEN }}
+      webhook: ${{ secrets.SLACK_WEBHOOK }}
