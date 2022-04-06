@@ -19,7 +19,7 @@
         <java.version>8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <bnd.version>6.1.0</bnd.version>
+        <bnd.version>6.2.0</bnd.version>
         <xerces.zip>Xerces-J-bin.${xerces.version}-xml-schema-1.1.zip</xerces.zip>
         <xerces.dir>${project.build.directory}/xerces-${xerces.version.name}-xml-schema-1.1</xerces.dir>
     </properties>
