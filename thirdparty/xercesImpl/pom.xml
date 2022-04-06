@@ -40,10 +40,10 @@
                     <execution>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <echo message="unzipping file" />
                                 <unzip src="lib/xercesImpl.jar" dest="target/classes" />
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

@@ -31,10 +31,10 @@
                     <execution>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <echo message="unzipping file" />
                                 <unzip src="lib/org.eclipse.wst.xml.xpath2.processor_${xpath2.version}.jar" dest="target/classes" />
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
