@@ -14,10 +14,10 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b #v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@860f60056505705214d223b91ed7a30f173f6142 #v3.3.0
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -26,7 +26,7 @@ jobs:
           settings-path: ${{ github.workspace }}
 
       - name: Create settings.xml
-        uses: whelk-io/maven-settings-xml-action@v20
+        uses: whelk-io/maven-settings-xml-action@8a613be18185c8521e1501081adad5041840f2c8 #v20
         with:
           repositories: '[{ "id": "github", "name": "github", "url": "https://maven.pkg.github.com/navikt/xerces-xmlschema-1.1", "releases": { "enabled": "true" }, "snapshots": { "enabled": "false" } }]'
           servers: '[{ "id": "github", "username": "${{ github.actor }}", "password": "${{ secrets.GITHUB_TOKEN }}" }]'
@@ -55,7 +55,7 @@ jobs:
           SLACK_ICON: https://github.com/github.png?size=48
           MSG_MINIMAL: true
           SLACK_FOOTER: "eresept © 2022"
-        uses: rtCamp/action-slack-notify@master
+        uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 #v2
       - name: Report failure?
         if: failure()
         env:
@@ -67,7 +67,7 @@ jobs:
           SLACK_ICON: https://github.com/github.png?size=48
           SLACK_MESSAGE: "See https://github.com/${{ github.repository }}/actions/run/${{ github.run_id }} for details"
           SLACK_FOOTER: "eresept © 2022"
-        uses: rtCamp/action-slack-notify@master
+        uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 #v2
       - name: Report cancellation?
         if: cancelled()
         env:
@@ -80,4 +80,4 @@ jobs:
           SLACK_ICON: https://github.com/github.png?size=48
           MSG_MINIMAL: true
           SLACK_FOOTER: "eresept © 2022"
-        uses: rtCamp/action-slack-notify@master
+        uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 #v2
