@@ -1,6 +1,7 @@
-name: 01 snyk test
+name: 01 snyk
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
