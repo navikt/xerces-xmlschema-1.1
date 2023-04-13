@@ -1,0 +1,23 @@
+name: 01 codeql
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+  schedule:
+    - cron: '33 2 * * 3,6'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+    uses: navikt/eresept-actions/.github/workflows/codeql.yaml@main
+    secrets:
+      token: ${{ secrets.READER_TOKEN }}
+      webhook: ${{ secrets.SLACK_WEBHOOK }}
