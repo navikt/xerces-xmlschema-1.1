@@ -42,42 +42,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
-      - name: Report success?
-        if: success()
-        env:
-          SLACK_CHANNEL: eresept
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: "release xerces-xmlschema-1.1"
-          SLACK_TITLE: "Successfully released _*xerces-xmlschema-1.1*_"
-          SLACK_MESSAGE: " "
-          SLACK_COLOR: "good"
-          SLACK_ICON: https://github.com/github.png?size=48
-          MSG_MINIMAL: true
-          SLACK_FOOTER: "eresept © 2022"
-        uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 #v2
-      - name: Report failure?
-        if: failure()
-        env:
-          SLACK_CHANNEL: eresept
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: "release xerces-xmlschema-1.1"
-          SLACK_TITLE: "Release of _*xerces-xmlschema-1.1*_ failed"
-          SLACK_COLOR: "danger"
-          SLACK_ICON: https://github.com/github.png?size=48
-          SLACK_MESSAGE: "See https://github.com/${{ github.repository }}/actions/run/${{ github.run_id }} for details"
-          SLACK_FOOTER: "eresept © 2022"
-        uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 #v2
-      - name: Report cancellation?
-        if: cancelled()
-        env:
-          SLACK_CHANNEL: eresept
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: "release xerces-xmlschema-1.1"
-          SLACK_TITLE: "Release of _*xerces-xmlschema-1.1*_ was cancelled"
-          SLACK_MESSAGE: " "
-          SLACK_COLOR: "warning"
-          SLACK_ICON: https://github.com/github.png?size=48
-          MSG_MINIMAL: true
-          SLACK_FOOTER: "eresept © 2022"
-        uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 #v2
+      - name: report to slack
+        uses: navikt/eresept-actions/slack-notify@main
+        with:
+          username: "release ${{ env.appver }}"
+          icon: https://github.com/github.png?size=48
+          title-success: "Successfully released _*${{ github.event.repository.name }}*_"
+          title-failure: "Release of _*${{ github.event.repository.name }}*_ failed"
+          title-cancelled: "Release of _*${{ github.event.repository.name }}*_ was cancelled"
+          webhook: ${{ secrets.SLACK_WEBHOOK }}
