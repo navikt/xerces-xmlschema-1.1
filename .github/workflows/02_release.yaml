@@ -46,7 +46,7 @@ jobs:
         uses: navikt/eresept-actions/slack-notify@main
         with:
           username: "release ${{ env.appver }}"
-          icon: https://github.com/github.png?size=48
+          icon: "https://github.com/github.png?size=48"
           title-success: "Successfully released _*${{ github.event.repository.name }}*_"
           title-failure: "Release of _*${{ github.event.repository.name }}*_ failed"
           title-cancelled: "Release of _*${{ github.event.repository.name }}*_ was cancelled"
