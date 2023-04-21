@@ -1,3 +1,6 @@
+[![Build](https://github.com/navikt/xerces-xmlschema-1.1/workflows/01%20build/badge.svg)](https://github.com/navikt/xerces-xmlschema-1.1/actions)
+[![CodeQL](https://github.com/navikt/xerces-xmlschema-1.1/actions/workflows/01_codeql.yaml/badge.svg)](https://github.com/navikt/xerces-xmlschema-1.1/actions/workflows/01_codeql.yaml)
+
 [![02 release](https://github.com/navikt/xerces-xmlschema-1.1/actions/workflows/02_release.yaml/badge.svg)](https://github.com/navikt/xerces-xmlschema-1.1/actions/workflows/02_release.yaml)
 
 # Xerces-J 2.12.2
