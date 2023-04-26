@@ -43,6 +43,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: report to slack
+        if: always()
         uses: navikt/eresept-actions/slack-notify@main
         with:
           username: "release ${{ env.appver }}"
