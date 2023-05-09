@@ -46,6 +46,7 @@ jobs:
         if: always()
         uses: navikt/eresept-actions/slack-notify@main
         with:
+          status: "${{ job.status }}"
           username: "release ${{ env.appver }}"
           icon: ":github:"
           title-success: "Successfully released _*${{ github.event.repository.name }}*_"
