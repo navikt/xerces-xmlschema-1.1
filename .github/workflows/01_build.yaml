@@ -13,15 +13,7 @@ on:
 
 jobs:
   build:
-    if: github.actor != 'dependabot[bot]'
     uses: navikt/eresept-actions/.github/workflows/build.yaml@main
     secrets:
       webhook: ${{ secrets.SLACK_WEBHOOK }}
       token: ${{ secrets.READER_TOKEN }}
-
-  dependabotbuild:
-    if: github.actor == 'dependabot[bot]'
-    uses: navikt/eresept-actions/.github/workflows/build.yaml@main
-    secrets:
-      webhook: ${{ secrets.SLACK_WEBHOOK }}
-      token: ${{ secrets.GITHUB_TOKEN }}
