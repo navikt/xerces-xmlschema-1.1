@@ -13,6 +13,11 @@ on:
 
 jobs:
   build:
+    permissions:
+      checks: write
+      contents: write
+      issues: read
+      pull-requests: write
     uses: navikt/eresept-actions/.github/workflows/build.yaml@main
     secrets:
       webhook: ${{ secrets.SLACK_WEBHOOK }}
