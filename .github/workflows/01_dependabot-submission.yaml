@@ -1,0 +1,17 @@
+name: 01 dependabot submission
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'pom.xml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    name: dependabot submission
+    uses: navikt/eresept-actions/.github/workflows/dependabot-submission.yaml@main
+    secrets:
+      token: ${{ secrets.READER_TOKEN }}
