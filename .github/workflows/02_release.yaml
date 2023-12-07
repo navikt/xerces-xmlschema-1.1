@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 #v4.0.0
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '21'
           cache: 'maven'
           server-id: github
           settings-path: ${{ github.workspace }}
