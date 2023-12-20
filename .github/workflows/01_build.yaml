@@ -5,19 +5,20 @@ on:
       - main
     paths-ignore:
       - '**.md'
-      - 'jenkins/**'
   pull_request:
     paths-ignore:
       - '**.md'
-      - 'jenkins/**'
 
 jobs:
   build:
+    name: build ${{ github.event.repository.name }}
     permissions:
+      actions: read
+      issues: read
       checks: write
       contents: write
-      issues: read
       pull-requests: write
+      security-events: write
     uses: navikt/eresept-actions/.github/workflows/build.yaml@main
     secrets:
       webhook: ${{ secrets.SLACK_WEBHOOK }}
