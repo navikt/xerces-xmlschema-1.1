@@ -18,8 +18,6 @@
         <dependency>
             <groupId>edu.princeton.cup</groupId>
             <artifactId>java-cup</artifactId>
-            <version>${java-cup-dep.version}</version>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

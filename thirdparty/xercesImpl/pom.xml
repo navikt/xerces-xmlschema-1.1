@@ -13,21 +13,19 @@
         <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+
     <dependencies>
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-            <version>${xerces.version}</version>
         </dependency>
         <dependency>
             <groupId>no.nav.eresept.thirdparty.java_cup</groupId>
             <artifactId>runtime</artifactId>
-            <version>${java-cup.version}</version>
         </dependency>
         <dependency>
             <groupId>no.nav.eresept.thirdparty.org.eclipse.wst.xml.xpath2</groupId>
             <artifactId>processor</artifactId>
-            <version>${xpath2.version}</version>
         </dependency>
     </dependencies>
 

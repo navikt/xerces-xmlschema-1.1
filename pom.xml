@@ -130,6 +130,50 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>edu.princeton.cup</groupId>
+                <artifactId>java-cup</artifactId>
+                <version>${java-cup-dep.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>${xerces.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.eresept.thirdparty.java_cup</groupId>
+                <artifactId>runtime</artifactId>
+                <version>${java-cup.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.eresept.thirdparty.org.eclipse.wst.xml.xpath2</groupId>
+                <artifactId>processor</artifactId>
+                <version>${xpath2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>no.nav.eresept.thirdparty.xerces</groupId>
+                <artifactId>xerces-impl</artifactId>
+                <version>${xerces.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <distributionManagement>
         <repository>
             <id>github</id>

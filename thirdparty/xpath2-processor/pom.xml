@@ -18,7 +18,6 @@
         <dependency>
             <groupId>no.nav.eresept.thirdparty.java_cup</groupId>
             <artifactId>runtime</artifactId>
-            <version>${java-cup.version}</version>
         </dependency>
     </dependencies>
 
