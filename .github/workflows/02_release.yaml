@@ -55,4 +55,5 @@ jobs:
           title-success: "Successfully released _*${{ github.event.repository.name }}*_"
           title-failure: "Release of _*${{ github.event.repository.name }}*_ failed"
           title-cancelled: "Release of _*${{ github.event.repository.name }}*_ was cancelled"
+          message-success: "Successfully released _*${{ github.event.repository.name }}*_"
           webhook: ${{ secrets.SLACK_WEBHOOK }}
