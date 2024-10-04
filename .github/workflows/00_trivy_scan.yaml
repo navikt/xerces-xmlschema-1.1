@@ -1,0 +1,76 @@
+name: 00 trivy scan
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+  schedule:
+    - cron: '6 5 * * 1'
+
+jobs:
+  trivy-scan:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read # for private repositories
+      contents: write
+      id-token: write
+      security-events: write # push sarif to github security
+    name: Security scan of ${{ github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 #v4.2.0
+        with:
+          fetch-depth: 0
+          repository: ${{ github.event.repository.full_name }}
+          ref: '${{ github.ref_name }}'
+
+      - name: Start time and timezone
+        run: |
+          echo "starttime=$(date +%s)" >> $GITHUB_ENV
+          sudo timedatectl set-timezone "Europe/Oslo"
+
+      - name: get versions, changelog and more
+        id: get-versions
+        uses: navikt/eresept-actions/get-versions-and-more@main
+
+      - name: Run Trivy vulnerability scanner on repository
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: "sarif"
+          hide-progress: true
+          output: "trivy-results.sarif"
+          severity: 'MEDIUM,HIGH,CRITICAL'
+          limit-severities-for-sarif: true
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-results.sarif"
+
+      - name: Calculate execution time
+        run: |
+          END_TIME=$(date +%s)
+          echo "exectime=$(( $END_TIME - ${{ env.starttime }} ))" >> $GITHUB_ENV
+
+      - name: Checkout badges
+        uses: navikt/eresept-actions/badges-checkout@main
+
+      - name: Scan date badge
+        uses: navikt/eresept-actions/badges-create@main
+        with:
+          left: 'scanned'
+          right: '${{ steps.get-versions.outputs.current-datetime }}'
+          color: 'blue'
+          filename: 'scan-date'
+          logo: 'shield'
+
+      - name: Commit badges
+        uses: navikt/eresept-actions/badges-commit@main
+
+      - name: Summary
+        run: echo "### Trivy scanned latest in ${{ env.exectime }} seconds" >> $GITHUB_STEP_SUMMARY
+
