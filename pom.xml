@@ -12,7 +12,7 @@
     <properties>
         <java-cup.version>0.10.0</java-cup.version>
         <java-cup-dep.version>10k</java-cup-dep.version>
-        <junit-jupiter.version>5.11.1</junit-jupiter.version>
+        <junit-jupiter.version>5.11.2</junit-jupiter.version>
         <xerces.version>2.12.2</xerces.version>
         <xerces.version.name>2_12_2</xerces.version.name>
         <xpath2.version>1.2.1</xpath2.version>
