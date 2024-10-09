@@ -11,7 +11,7 @@ on:
         description: 'Skip database-update'
         required: false
         type: boolean
-        default: false
+        default: true
   schedule:
     - cron: '6 5 * * 1'
 
