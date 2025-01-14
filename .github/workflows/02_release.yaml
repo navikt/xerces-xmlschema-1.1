@@ -20,6 +20,9 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
         with:
           fetch-depth: 0
+          persist-credentials: false
+          show-progress: false
+
       - uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b #v4.6.0
         with:
           distribution: 'temurin'
@@ -36,8 +39,10 @@ jobs:
 
       - name: Configure git user
         run: |
-          git config user.name "GitHub Actions Bot (${{ github.actor }})"
+          git config user.name "GitHub Actions Bot (${ACTOR})"
           git config user.email "actions@github.com"
+        env:
+          ACTOR: ${{ github.actor }}
 
       - name: Publish
         run: |

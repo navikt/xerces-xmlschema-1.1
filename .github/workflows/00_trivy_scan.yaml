@@ -28,6 +28,8 @@ jobs:
           fetch-depth: 0
           repository: ${{ github.event.repository.full_name }}
           ref: '${{ github.ref_name }}'
+          persist-credentials: true
+          show-progress: false
 
       - name: Start time and timezone
         run: |
@@ -56,7 +58,7 @@ jobs:
       - name: Calculate execution time
         run: |
           END_TIME=$(date +%s)
-          echo "exectime=$(( $END_TIME - ${{ env.starttime }} ))" >> $GITHUB_ENV
+          echo "exectime=$(( $END_TIME - ${starttime} ))" >> $GITHUB_ENV
 
       - name: Checkout badges
         uses: navikt/eresept-actions/badges-checkout@main
@@ -74,5 +76,5 @@ jobs:
         uses: navikt/eresept-actions/badges-commit@main
 
       - name: Summary
-        run: echo "### Trivy scanned latest in ${{ env.exectime }} seconds" >> $GITHUB_STEP_SUMMARY
+        run: echo "### Trivy scanned latest in ${exectime} seconds" >> $GITHUB_STEP_SUMMARY
 
