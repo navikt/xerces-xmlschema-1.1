@@ -57,8 +57,8 @@ jobs:
           status: "${{ job.status }}"
           username: "release ${{ env.appver }}"
           icon: ":github:"
-          title-success: "Successfully released _*${{ github.event.repository.name }}*_"
-          title-failure: "Release of _*${{ github.event.repository.name }}*_ failed"
-          title-cancelled: "Release of _*${{ github.event.repository.name }}*_ was cancelled"
+          title-success: "Successfully released ${{ github.event.repository.name }}"
+          title-failure: "Release of ${{ github.event.repository.name }} failed"
+          title-cancelled: "Release of ${{ github.event.repository.name }} was cancelled"
           message-success: "Successfully released _*${{ github.event.repository.name }}*_"
           webhook: ${{ secrets.SLACK_WEBHOOK }}
